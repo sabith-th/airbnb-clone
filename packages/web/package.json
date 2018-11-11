@@ -19,7 +19,8 @@
     "react-dom": "^16.6.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
-    "typescript": "3.1.6"
+    "typescript": "3.1.6",
+    "yup": "^0.26.6"
   },
   "scripts": {
     "lint": "tslint --project tsconfig.json",
@@ -39,6 +40,7 @@
   ],
   "devDependencies": {
     "@types/react-router-dom": "^4.3.1",
+    "@types/yup": "^0.26.1",
     "tslint-react": "^3.6.0"
   }
 }
