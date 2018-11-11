@@ -1,10 +1,7 @@
+import { validUserSchema } from "@abb/common";
 import { Button, Form, Icon, Input } from "antd";
 import { FormikErrors, FormikProps, withFormik } from "formik";
 import * as React from "react";
-import * as yup from "yup";
-
-const INVALID_EMAIL_ERROR_MSG = "Email must be a valid email";
-const PASSWORD_MIN_LENGTH_ERROR_MSG = "Password must be at least 5 characters";
 
 const FormItem = Form.Item;
 
@@ -82,22 +79,8 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
   }
 }
 
-const validationSchema = yup.object().shape({
-  email: yup
-    .string()
-    .min(5)
-    .max(255)
-    .email(INVALID_EMAIL_ERROR_MSG)
-    .required(),
-  password: yup
-    .string()
-    .min(5, PASSWORD_MIN_LENGTH_ERROR_MSG)
-    .max(255)
-    .required()
-});
-
 export const RegisterView = withFormik<Props, FormValues>({
-  validationSchema,
+  validationSchema: validUserSchema,
   mapPropsToValues: () => ({
     email: "",
     password: ""

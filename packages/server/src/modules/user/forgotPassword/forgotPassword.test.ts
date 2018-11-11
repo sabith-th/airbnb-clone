@@ -1,3 +1,4 @@
+import { PASSWORD_MIN_LENGTH_ERROR_MSG } from "@abb/common";
 import * as faker from "faker";
 import * as Redis from "ioredis";
 import { Connection } from "typeorm";
@@ -7,7 +8,6 @@ import { createForgotPasswordLink } from "../../../utils/createForgotPasswordLin
 import { forgotPasswordLockAccount } from "../../../utils/forgotPasswordLockAccount";
 import { TestClient } from "../../../utils/TestClient";
 import { FORGOT_PASSWORD_LOCKED_MSG } from "../login/errorMessages";
-import { PASSWORD_MIN_LENGTH_ERROR_MSG } from "../register/errorMessages";
 import { EXPIRED_KEY_ERROR_MSG } from "./errorMessages";
 
 const redis = new Redis();

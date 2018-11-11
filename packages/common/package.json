@@ -1,0 +1,22 @@
+{
+  "name": "@abb/common",
+  "version": "1.0.0",
+  "description": "Common code for Airbnb clone project",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "author": "Sabith T H",
+  "license": "MIT",
+  "scripts": {
+    "build": "rimraf ./dist && tsc"
+  },
+  "devDependencies": {
+    "@types/yup": "^0.26.1",
+    "rimraf": "^2.6.2",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "typescript": "^3.1.6"
+  },
+  "dependencies": {
+    "yup": "^0.26.6"
+  }
+}

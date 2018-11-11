@@ -1,13 +1,13 @@
+import {
+  INVALID_EMAIL_ERROR_MSG,
+  PASSWORD_MIN_LENGTH_ERROR_MSG
+} from "@abb/common";
 import * as faker from "faker";
 import { Connection } from "typeorm";
 import { User } from "../../../entity/User";
 import { createTestConnection } from "../../../testUtils/createTestConnection";
 import { TestClient } from "../../../utils/TestClient";
-import {
-  DUPLICATE_EMAIL_ERROR_MSG,
-  INVALID_EMAIL_ERROR_MSG,
-  PASSWORD_MIN_LENGTH_ERROR_MSG
-} from "./errorMessages";
+import { DUPLICATE_EMAIL_ERROR_MSG } from "./errorMessages";
 
 let conn: Connection;
 faker.seed(process.hrtime()[1]);

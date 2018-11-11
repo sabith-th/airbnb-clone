@@ -1,3 +1,4 @@
+import { registerPasswordValidation } from "@abb/common";
 import * as bcrypt from "bcryptjs";
 import * as yup from "yup";
 import { FORGOT_PASSWORD_PREFIX } from "../../../constants";
@@ -7,7 +8,6 @@ import { GQL } from "../../../types/schema";
 import { createForgotPasswordLink } from "../../../utils/createForgotPasswordLink";
 import { forgotPasswordLockAccount } from "../../../utils/forgotPasswordLockAccount";
 import { formatYupError } from "../../../utils/formatYupError";
-import { registerPasswordValidation } from "../../../yupSchemas";
 import {
   EXPIRED_KEY_ERROR_MSG,
   USER_NOT_FOUND_ERROR_MSG

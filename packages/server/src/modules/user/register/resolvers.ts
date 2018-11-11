@@ -1,24 +1,11 @@
-import * as yup from "yup";
+import { validUserSchema } from "@abb/common";
 import { User } from "../../../entity/User";
 import { ResolverMap } from "../../../types/graphql-utils";
 import { GQL } from "../../../types/schema";
 import { formatYupError } from "../../../utils/formatYupError";
 import { sendEmail } from "../../../utils/sendEmail";
-import { registerPasswordValidation } from "../../../yupSchemas";
 import { createConfirmEmailLink } from "./createConfirmEmailLink";
-import {
-  DUPLICATE_EMAIL_ERROR_MSG,
-  INVALID_EMAIL_ERROR_MSG
-} from "./errorMessages";
-
-const schema = yup.object().shape({
-  email: yup
-    .string()
-    .min(5)
-    .max(255)
-    .email(INVALID_EMAIL_ERROR_MSG),
-  password: registerPasswordValidation
-});
+import { DUPLICATE_EMAIL_ERROR_MSG } from "./errorMessages";
 
 export const resolvers: ResolverMap = {
   Mutation: {
@@ -28,7 +15,7 @@ export const resolvers: ResolverMap = {
       { redis, url }
     ) => {
       try {
-        await schema.validate(args, { abortEarly: false });
+        await validUserSchema.validate(args, { abortEarly: false });
       } catch (error) {
         return formatYupError(error);
       }
