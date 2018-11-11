@@ -1,7 +1,8 @@
 import { validUserSchema } from "@abb/common";
-import { Button, Form, Icon, Input } from "antd";
-import { FormikErrors, FormikProps, withFormik } from "formik";
+import { Button, Form, Icon } from "antd";
+import { Field, FormikErrors, FormikProps, withFormik } from "formik";
 import * as React from "react";
+import { InputField } from "../../shared/InputField";
 
 const FormItem = Form.Item;
 
@@ -16,16 +17,7 @@ interface Props {
 
 class C extends React.PureComponent<FormikProps<FormValues> & Props> {
   render() {
-    const {
-      values,
-      handleBlur,
-      handleChange,
-      handleSubmit,
-      touched,
-      errors
-    } = this.props;
-    const invalidEmail = touched.email && errors.email;
-    const invalidPassword = touched.password && errors.password;
+    const { handleSubmit } = this.props;
     return (
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Form
@@ -33,35 +25,19 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
           style={{ minWidth: 300 }}
           onSubmit={handleSubmit}
         >
-          <FormItem
-            help={invalidEmail}
-            validateStatus={invalidEmail ? "error" : "success"}
-            hasFeedback={true}
-          >
-            <Input
-              name="email"
-              prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-              placeholder="Email"
-              value={values.email}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-          </FormItem>
-          <FormItem
-            help={invalidPassword}
-            hasFeedback={true}
-            validateStatus={invalidPassword ? "error" : "success"}
-          >
-            <Input
-              name="password"
-              prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
-              type="password"
-              placeholder="Password"
-              value={values.password}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-          </FormItem>
+          <Field
+            name="email"
+            prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
+            placeholder="Email"
+            component={InputField}
+          />
+          <Field
+            name="password"
+            prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
+            type="password"
+            placeholder="Password"
+            component={InputField}
+          />
           <FormItem>
             <Button
               type="primary"
