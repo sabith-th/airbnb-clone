@@ -37,7 +37,7 @@ export const resolvers: ResolverMap = {
         password
       });
       await user.save();
-      if (process.env.NODE_ENV === "production") {
+      if (process.env.NODE_ENV !== "production") {
         await sendEmail(
           email,
           await createConfirmEmailLink(url, user.id, redis)
