@@ -20,9 +20,11 @@
     "@types/sparkpost": "^2.1.4",
     "@types/uuid": "^3.4.4",
     "@types/yup": "^0.24.9",
+    "copyfiles": "^2.1.0",
     "gql2ts": "^1.9.0",
     "jest": "^23.6.0",
     "nodemon": "^1.18.4",
+    "rimraf": "^2.6.2",
     "ts-jest": "^23.10.1",
     "ts-node": "7.0.1",
     "tslint": "^5.11.0",
@@ -30,6 +32,7 @@
     "typescript": "3.1.6"
   },
   "dependencies": {
+    "@abb/common": "1.0.0",
     "@gql2ts/from-schema": "^1.10.0",
     "bcryptjs": "^2.4.3",
     "connect-redis": "^3.3.3",
@@ -55,12 +58,12 @@
     "sparkpost": "^2.1.2",
     "typeorm": "0.2.7",
     "uuid": "^3.3.2",
-    "yup": "^0.26.6",
-    "@abb/common": "1.0.0"
+    "yup": "^0.26.6"
   },
   "scripts": {
     "start": "NODE_ENV=development nodemon --exec ts-node src/index.ts",
     "test": "NODE_ENV=test jest --detectOpenHandles --watch",
-    "gen-schema-types": "ts-node src/scripts/createTypes.ts"
+    "gen-schema-types": "ts-node src/scripts/createTypes.ts",
+    "build": "rimraf ./dist && tsc && copyfiles -u 1 src/**/*.graphql dist"
   }
 }

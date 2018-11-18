@@ -23,7 +23,8 @@
     "paths": {
       "rate-limit-redis": ["./src/types/rate-limit-redis"],
       "merge-graphql-schemas": ["./src/types/merge-graphql-schemas"]
-    }
+    },
+    "skipLibCheck": true
   },
   "exclude": ["node_modules"],
   "include": ["./src/**/*.tsx", "./src/**/*.ts"]
