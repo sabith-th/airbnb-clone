@@ -6,7 +6,11 @@
   "author": "Sabith T H",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf ./dist && tsc"
+    "build": "rimraf ./dist && tsc",
+    "service:download": "apollo service:download --endpoint=http://localhost:4000",
+    "client:codegen": "apollo client:codegen -c=apollo.config.js --target=typescript --outputFlat src/schemaTypes.ts",
+    "gen:types": "npm run service:download && npm run client:codegen",
+    "refresh:types": "npm run gen:types && npm run build"
   },
   "dependencies": {
     "graphql": "^14.0.2",
@@ -19,6 +23,7 @@
     "@types/node": "^10.12.5",
     "@types/react": "^16.7.3",
     "@types/react-dom": "^16.0.9",
+    "apollo": "^2.1.2",
     "rimraf": "^2.6.2",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
