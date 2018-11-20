@@ -125,10 +125,11 @@ export const startServer = async () => {
     }
   );
 
+  const PORT = process.env.PORT || 4000;
   const app = await server.start({
     cors,
-    port: process.env.NODE_ENV === "test" ? 0 : 4000
+    port: process.env.NODE_ENV === "test" ? 0 : PORT
   });
-  console.log("Server running on localhost:4000");
+  console.log(`Server running on localhost:${PORT}`);
   return app;
 };
