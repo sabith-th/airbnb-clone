@@ -7,3 +7,6 @@ temp/
 dist/
 .env
 dump.rdb
+.netlify/
+.env.production
+.env.development
