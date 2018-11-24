@@ -1,6 +1,6 @@
-import { validUserSchema } from "@abb/common";
+import { loginSchema } from "@abb/common";
 import { Button, Form, Icon } from "antd";
-import { Field, FormikErrors, FormikProps, withFormik } from "formik";
+import { Field, FormikProps, withFormik } from "formik";
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { InputField } from "../../shared/InputField";
@@ -13,7 +13,11 @@ interface FormValues {
 }
 
 interface Props {
-  submit: (values: FormValues) => Promise<FormikErrors<FormValues> | null>;
+  submit: (
+    values: FormValues
+  ) => Promise<{
+    [key: string]: string;
+  } | null>;
 }
 
 class C extends React.PureComponent<FormikProps<FormValues> & Props> {
@@ -40,15 +44,20 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
             component={InputField}
           />
           <FormItem>
+            <a className="login-form-forgot" href="">
+              Forgot Password?
+            </a>
+          </FormItem>
+          <FormItem>
             <Button
               type="primary"
               htmlType="submit"
               className="login-form-button"
               style={{ width: "100%" }}
             >
-              Register
+              Login
             </Button>
-            Or <Link to="/login">Login</Link>
+            Or <Link to="/register">Register</Link>
           </FormItem>
         </Form>
       </div>
@@ -56,8 +65,10 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
   }
 }
 
-export const RegisterView = withFormik<Props, FormValues>({
-  validationSchema: validUserSchema,
+export const LoginView = withFormik<Props, FormValues>({
+  validationSchema: loginSchema,
+  validateOnBlur: false,
+  validateOnChange: false,
   mapPropsToValues: () => ({
     email: "",
     password: ""
