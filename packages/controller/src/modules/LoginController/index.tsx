@@ -7,13 +7,17 @@ import { normalizeErrors } from "../../utils/normalizeErrors";
 const loginMutation = gql`
   mutation LoginMutation($email: String!, $password: String!) {
     login(email: $email, password: $password) {
-      path
-      message
+      errors {
+        path
+        message
+      }
+      sessionId
     }
   }
 `;
 
 interface Props {
+  onSessionId?: (sessionId: string) => void;
   children: (
     data: {
       submit: (
@@ -32,10 +36,17 @@ class C extends React.PureComponent<
     const response = await this.props.mutate({
       variables: values
     });
-    const login = (response as any).data.login;
-    if (login) {
-      return normalizeErrors(login);
+    const errors = (response as any).data.login.errors;
+    const sessionId = (response as any).data.login.sessionId;
+
+    if (errors) {
+      return normalizeErrors(errors);
     }
+
+    if (sessionId && this.props.onSessionId) {
+      this.props.onSessionId(sessionId);
+    }
+
     return null;
   };
 

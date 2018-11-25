@@ -3,6 +3,7 @@
 .expo/
 node_modules/
 build/
+dist/
 tmp/
 temp/
 dist/
