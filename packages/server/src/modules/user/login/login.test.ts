@@ -22,12 +22,15 @@ const loginExpectError = async (e: string, p: string, errorMessage: string) => {
   const client = new TestClient(process.env.TEST_HOST as string);
   const response = await client.login(e, p);
   expect(response.data).toEqual({
-    login: [
-      {
-        path: "email",
-        message: errorMessage
-      }
-    ]
+    login: {
+      errors: [
+        {
+          path: "email",
+          message: errorMessage
+        }
+      ],
+      sessionId: null
+    }
   });
 };
 
@@ -52,10 +55,10 @@ describe("Login resolver tests", async () => {
     await loginExpectError(email, password, CONFIRM_EMAIL_MSG);
   });
 
-  test("confirmed users should get null response", async () => {
+  test("confirmed users should get no errors and a valid sessionId", async () => {
     const client = new TestClient(process.env.TEST_HOST as string);
     await User.update({ email }, { confirmed: true });
     const response = await client.login(email, password);
-    expect(response.data).toEqual({ login: null });
+    expect(response.data.login.errors).toBeNull();
   });
 });

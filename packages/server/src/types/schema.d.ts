@@ -21,25 +21,21 @@ export namespace GQL {
   }
 
   interface IQuery {
-    __typename: "Query";
-    bye3: string;
-    bye2: string;
-    dummy: string | null;
+    __typename: 'Query';
     me: IUser | null;
-    bye: string;
   }
 
   interface IUser {
-    __typename: "User";
+    __typename: 'User';
     id: string;
     email: string;
   }
 
   interface IMutation {
-    __typename: "Mutation";
-    sendForgotPassword: boolean | null;
+    __typename: 'Mutation';
+    sendForgotPasswordEmail: boolean | null;
     forgotPasswordChange: Array<IError> | null;
-    login: Array<IError> | null;
+    login: ILoginResponse;
     logout: boolean | null;
     register: Array<IError> | null;
   }
@@ -64,9 +60,15 @@ export namespace GQL {
   }
 
   interface IError {
-    __typename: "Error";
+    __typename: 'Error';
     path: string;
     message: string;
+  }
+
+  interface ILoginResponse {
+    __typename: 'LoginResponse';
+    errors: Array<IError> | null;
+    sessionId: string | null;
   }
 }
 

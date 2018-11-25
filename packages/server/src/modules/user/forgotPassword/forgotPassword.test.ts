@@ -40,12 +40,15 @@ describe("forgotPassword resolver tests", () => {
     // Ensure user can't login once accound is locked
     expect(await client.login(email, password)).toEqual({
       data: {
-        login: [
-          {
-            path: "email",
-            message: FORGOT_PASSWORD_LOCKED_MSG
-          }
-        ]
+        login: {
+          errors: [
+            {
+              path: "email",
+              message: FORGOT_PASSWORD_LOCKED_MSG
+            }
+          ],
+          sessionId: null
+        }
       }
     });
 
@@ -84,10 +87,7 @@ describe("forgotPassword resolver tests", () => {
     });
 
     // Ensure user is able to login with new passoword
-    expect(await client.login(email, newPassword)).toEqual({
-      data: {
-        login: null
-      }
-    });
+    const successfullLoginResponse = await client.login(email, newPassword);
+    expect(successfullLoginResponse.data.login.errors).toBeNull();
   });
 });
