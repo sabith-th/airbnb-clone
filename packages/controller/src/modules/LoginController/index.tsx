@@ -2,6 +2,7 @@ import gql from "graphql-tag";
 import * as React from "react";
 import { ChildMutateProps, graphql } from "react-apollo";
 import { LoginMutation, LoginMutationVariables } from "../../schemaTypes";
+import { NormalizedErrorMap } from "../../types/NormalizedErrorMap";
 import { normalizeErrors } from "../../utils/normalizeErrors";
 
 const loginMutation = gql`
@@ -22,9 +23,7 @@ interface Props {
     data: {
       submit: (
         values: LoginMutationVariables
-      ) => Promise<{
-        [key: string]: string;
-      } | null>;
+      ) => Promise<NormalizedErrorMap | null>;
     }
   ) => JSX.Element | null;
 }

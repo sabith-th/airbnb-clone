@@ -1,6 +1,7 @@
 import { validUserSchema } from "@abb/common";
+import { NormalizedErrorMap } from "@abb/controller";
 import { Button, Form, Icon } from "antd";
-import { Field, FormikErrors, FormikProps, withFormik } from "formik";
+import { Field, FormikProps, withFormik } from "formik";
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { InputField } from "../../shared/InputField";
@@ -13,7 +14,7 @@ interface FormValues {
 }
 
 interface Props {
-  submit: (values: FormValues) => Promise<FormikErrors<FormValues> | null>;
+  submit: (values: FormValues) => Promise<NormalizedErrorMap | null>;
 }
 
 class C extends React.PureComponent<FormikProps<FormValues> & Props> {

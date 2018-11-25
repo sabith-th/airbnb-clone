@@ -12,7 +12,7 @@ export const InputField: React.SFC<
     <FormItem
       help={errorMessage}
       validateStatus={errorMessage ? "error" : "success"}
-      hasFeedback={true}
+      hasFeedback={touched[field.name] ? true : false}
     >
       <Input {...field} {...props} />
     </FormItem>

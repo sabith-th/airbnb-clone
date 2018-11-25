@@ -1,5 +1,6 @@
 import { loginSchema } from "@abb/common";
-import { Field, FormikErrors, FormikProps, withFormik } from "formik";
+import { NormalizedErrorMap } from "@abb/controller";
+import { Field, FormikProps, withFormik } from "formik";
 import * as React from "react";
 import { View } from "react-native";
 import { Button, Card } from "react-native-elements";
@@ -11,7 +12,7 @@ interface FormValues {
 }
 
 interface Props {
-  submit: (values: FormValues) => Promise<FormikErrors<FormValues> | null>;
+  submit: (values: FormValues) => Promise<NormalizedErrorMap | null>;
 }
 
 class C extends React.PureComponent<FormikProps<FormValues> & Props> {
