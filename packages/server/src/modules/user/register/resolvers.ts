@@ -40,7 +40,8 @@ export const resolvers: ResolverMap = {
       if (process.env.NODE_ENV !== "test") {
         await sendEmail(
           email,
-          await createConfirmEmailLink(url, user.id, redis)
+          await createConfirmEmailLink(url, user.id, redis),
+          "Confirm Email"
         );
       }
       return null;

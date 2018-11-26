@@ -1,6 +1,10 @@
 import * as nodemailer from "nodemailer";
 
-export const sendEmail = async (receipient: string, url: string) => {
+export const sendEmail = async (
+  receipient: string,
+  url: string,
+  linkText: string
+) => {
   const transporter = nodemailer.createTransport({
     host: "smtp.ethereal.email",
     port: 587,
@@ -17,7 +21,7 @@ export const sendEmail = async (receipient: string, url: string) => {
     html: `<html>
               <body>
                 <p>Please follow the below link to verify your account.</p>
-                <a href="${url}">Confirm Email</a>
+                <a href="${url}">${linkText}</a>
                 <p>Thank you for signing up with Airbnb clone.</p>
               </body>
             </html>`

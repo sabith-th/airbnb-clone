@@ -8,6 +8,7 @@ import { GQL } from "../../../types/schema";
 import { createForgotPasswordLink } from "../../../utils/createForgotPasswordLink";
 import { forgotPasswordLockAccount } from "../../../utils/forgotPasswordLockAccount";
 import { formatYupError } from "../../../utils/formatYupError";
+import { sendEmail } from "../../../utils/sendEmail";
 import {
   EXPIRED_KEY_ERROR_MSG,
   USER_NOT_FOUND_ERROR_MSG
@@ -34,9 +35,14 @@ export const resolvers: ResolverMap = {
         ];
       }
       await forgotPasswordLockAccount(user.id, redis);
-      // @todo add frontend url
-      await createForgotPasswordLink("", user.id, redis);
-      // @todo send email
+
+      const url = await createForgotPasswordLink(
+        process.env.FRONTEND_HOST as string,
+        user.id,
+        redis
+      );
+
+      await sendEmail(email, url, "Reset Password");
       return true;
     },
     forgotPasswordChange: async (
