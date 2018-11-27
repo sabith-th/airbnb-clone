@@ -1,6 +1,5 @@
-import { registerPasswordValidation } from "@abb/common";
+import { changePasswordSchema } from "@abb/common";
 import * as bcrypt from "bcryptjs";
-import * as yup from "yup";
 import { FORGOT_PASSWORD_PREFIX } from "../../../constants";
 import { User } from "../../../entity/User";
 import { ResolverMap } from "../../../types/graphql-utils";
@@ -13,10 +12,6 @@ import {
   EXPIRED_KEY_ERROR_MSG,
   USER_NOT_FOUND_ERROR_MSG
 } from "./errorMessages";
-
-const schema = yup.object().shape({
-  newPassword: registerPasswordValidation
-});
 
 export const resolvers: ResolverMap = {
   Mutation: {
@@ -56,14 +51,17 @@ export const resolvers: ResolverMap = {
       if (!userId) {
         return [
           {
-            path: "key",
+            path: "newPassword",
             message: EXPIRED_KEY_ERROR_MSG
           }
         ];
       }
 
       try {
-        await schema.validate({ newPassword }, { abortEarly: false });
+        await changePasswordSchema.validate(
+          { newPassword },
+          { abortEarly: false }
+        );
       } catch (error) {
         return formatYupError(error);
       }
