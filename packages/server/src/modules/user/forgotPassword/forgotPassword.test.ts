@@ -79,7 +79,7 @@ describe("forgotPassword resolver tests", () => {
       data: {
         forgotPasswordChange: [
           {
-            path: "key",
+            path: "newPassword",
             message: EXPIRED_KEY_ERROR_MSG
           }
         ]

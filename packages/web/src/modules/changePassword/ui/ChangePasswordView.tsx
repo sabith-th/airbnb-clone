@@ -1,5 +1,8 @@
 import { changePasswordSchema } from "@abb/common";
-import { NormalizedErrorMap } from "@abb/controller";
+import {
+  ForgotPasswordChangeMutationVariables,
+  NormalizedErrorMap
+} from "@abb/controller";
 import { Button, Form, Icon } from "antd";
 import { Field, FormikProps, withFormik } from "formik";
 import * as React from "react";
@@ -12,7 +15,11 @@ interface FormValues {
 }
 
 interface Props {
-  submit: (values: FormValues) => Promise<NormalizedErrorMap | null>;
+  onFinish: () => void;
+  token: string;
+  submit: (
+    values: ForgotPasswordChangeMutationVariables
+  ) => Promise<NormalizedErrorMap | null>;
 }
 
 class C extends React.PureComponent<FormikProps<FormValues> & Props> {
@@ -53,10 +60,12 @@ export const ChangePasswordView = withFormik<Props, FormValues>({
   mapPropsToValues: () => ({
     newPassword: ""
   }),
-  handleSubmit: async (values, { props, setErrors }) => {
-    const errors = await props.submit(values);
+  handleSubmit: async ({ newPassword }, { props, setErrors }) => {
+    const errors = await props.submit({ newPassword, key: props.token });
     if (errors) {
       setErrors(errors);
+    } else {
+      props.onFinish();
     }
   }
 })(C);

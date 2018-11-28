@@ -4,6 +4,7 @@ import { ChangePasswordConnector } from "../modules/changePassword/ChangePasswor
 import { ForgotPasswordConnector } from "../modules/forgotPassword/ForgotPasswordConnector";
 import { LoginConnector } from "../modules/login/LoginConnector";
 import { RegisterConnector } from "../modules/register/RegisterConnector";
+import { TextPage } from "../modules/TextPage";
 
 export const Routes = () => (
   <BrowserRouter>
@@ -20,6 +21,7 @@ export const Routes = () => (
         path="/change-password/:key"
         component={ChangePasswordConnector}
       />
+      <Route path="/m/" component={TextPage} />
     </Switch>
   </BrowserRouter>
 );

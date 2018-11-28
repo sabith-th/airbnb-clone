@@ -6,9 +6,8 @@ import { ChangePasswordView } from "./ui/ChangePasswordView";
 export class ChangePasswordConnector extends React.PureComponent<
   RouteComponentProps<{ key: string }>
 > {
-  submit = async (values: any) => {
-    console.log(values);
-    return null;
+  onFinish = () => {
+    this.props.history.push("/login");
   };
 
   render() {
@@ -22,8 +21,9 @@ export class ChangePasswordConnector extends React.PureComponent<
       <ChangePasswordController>
         {({ submit }) => (
           <ChangePasswordView
-            // tslint:disable-next-line
-            submit={({ newPassword }) => submit({ key, newPassword })}
+            token={key}
+            submit={submit}
+            onFinish={this.onFinish}
           />
         )}
       </ChangePasswordController>

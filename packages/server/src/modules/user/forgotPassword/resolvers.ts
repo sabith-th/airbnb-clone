@@ -8,10 +8,7 @@ import { createForgotPasswordLink } from "../../../utils/createForgotPasswordLin
 import { forgotPasswordLockAccount } from "../../../utils/forgotPasswordLockAccount";
 import { formatYupError } from "../../../utils/formatYupError";
 import { sendEmail } from "../../../utils/sendEmail";
-import {
-  EXPIRED_KEY_ERROR_MSG,
-  USER_NOT_FOUND_ERROR_MSG
-} from "./errorMessages";
+import { EXPIRED_KEY_ERROR_MSG } from "./errorMessages";
 
 export const resolvers: ResolverMap = {
   Mutation: {
@@ -22,12 +19,7 @@ export const resolvers: ResolverMap = {
     ) => {
       const user = await User.findOne({ where: { email } });
       if (!user) {
-        return [
-          {
-            path: "email",
-            message: USER_NOT_FOUND_ERROR_MSG
-          }
-        ];
+        return false;
       }
       await forgotPasswordLockAccount(user.id, redis);
 
