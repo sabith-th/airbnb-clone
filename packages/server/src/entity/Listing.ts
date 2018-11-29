@@ -1,17 +1,24 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn
+} from "typeorm";
+import { User } from "./User";
 
 @Entity("listings")
-export class Listings extends BaseEntity {
+export class Listing extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column("varchar", { length: 100})
+  @Column("varchar", { length: 100 })
   name: string;
 
   @Column("text")
   pictureUrl: string;
 
-  @Column("varchar", {length: 255})
+  @Column("varchar", { length: 255 })
   description: string;
 
   @Column("int")
@@ -29,7 +36,9 @@ export class Listings extends BaseEntity {
   @Column("int")
   guests: number;
 
-  @Column("text", {array: true})
+  @Column("text", { array: true })
   amenities: string[];
 
+  @ManyToOne(() => User, user => user.listings)
+  user: User;
 }

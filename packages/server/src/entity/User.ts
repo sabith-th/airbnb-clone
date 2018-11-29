@@ -4,8 +4,10 @@ import {
   BeforeInsert,
   Column,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn
 } from "typeorm";
+import { Listing } from "./Listing";
 
 @Entity("users")
 export class User extends BaseEntity {
@@ -26,6 +28,9 @@ export class User extends BaseEntity {
 
   @Column("text", { nullable: true })
   twitterId: string | null;
+
+  @OneToMany(() => Listing, listing => listing.user)
+  listings: Listing[];
 
   @BeforeInsert()
   async hashPassword() {

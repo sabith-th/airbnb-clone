@@ -77,6 +77,10 @@ export const startServer = async () => {
       ? await createTestConnection(true)
       : await createTypeORMConnection();
 
+  if (process.env.NODE_ENV !== "test") {
+    await connection.runMigrations();
+  }
+
   passport.use(
     new Strategy(
       {
