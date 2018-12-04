@@ -2,6 +2,7 @@ import * as connectRedis from "connect-redis";
 import "dotenv/config";
 import * as RateLimit from "express-rate-limit";
 import * as session from "express-session";
+import { applyMiddleware } from "graphql-middleware";
 import { GraphQLServer } from "graphql-yoga";
 import * as passport from "passport";
 import { Strategy } from "passport-twitter";
@@ -9,6 +10,7 @@ import * as RateLimitRedisStore from "rate-limit-redis";
 import "reflect-metadata";
 import { REDIS_SESSION_PREFIX } from "./constants";
 import { User } from "./entity/User";
+import { middleware } from "./middleware";
 import { redis } from "./redis";
 import { confirmEmail } from "./routes/confirmEmail";
 import { createTestConnection } from "./testUtils/createTestConnection";
@@ -23,8 +25,11 @@ export const startServer = async () => {
     await redis.flushall();
   }
 
+  const schema = genSchema();
+  applyMiddleware(schema, middleware);
+
   const server = new GraphQLServer({
-    schema: genSchema(),
+    schema,
     context: ({ request }) => ({
       redis,
       url: request.protocol + "://" + request.get("host"),

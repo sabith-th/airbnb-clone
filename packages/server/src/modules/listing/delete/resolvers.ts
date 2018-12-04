@@ -4,10 +4,6 @@ import { ResolverMap } from "../../../types/graphql-utils";
 export const resolvers: ResolverMap = {
   Mutation: {
     deleteListing: async (_, { id }, { session }) => {
-      if (!session.userId) {
-        throw new Error("Not Authenticated");
-      }
-
       const listing = await Listing.findOne({ where: { id } });
 
       if (!listing) {
