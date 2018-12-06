@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ChangePasswordConnector } from "../modules/changePassword/ChangePasswordConnector";
 import { ForgotPasswordConnector } from "../modules/forgotPassword/ForgotPasswordConnector";
 import { CreateListingConnector } from "../modules/listing/create/CreateListingConnector";
+import { DeleteListingConnector } from "../modules/listing/delete/DeleteListing";
 import { LoginConnector } from "../modules/login/LoginConnector";
 import { RegisterConnector } from "../modules/register/RegisterConnector";
 import { TextPage } from "../modules/TextPage";
@@ -25,6 +26,7 @@ export const Routes = () => (
       />
       <Route path="/m/" component={TextPage} />
       <AuthRouter path="/create-listing" component={CreateListingConnector} />
+      <AuthRouter path="/delete-listing" component={DeleteListingConnector} />
     </Switch>
   </BrowserRouter>
 );
