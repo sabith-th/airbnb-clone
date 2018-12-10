@@ -13,7 +13,13 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
-    "lib": ["es2015", "dom", "esnext.asynciterable"]
+    "lib": [
+      "es2015",
+      "dom",
+      "esnext.asynciterable"
+    ]
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }

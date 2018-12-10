@@ -10,18 +10,21 @@ export const Page1 = () => (
       prefix={<Icon type="home" style={{ color: "rgba(0,0,0,.25)" }} />}
       placeholder="Name"
       component={InputField}
+      label="Name of the Listing"
     />
     <Field
       name="category"
       prefix={<Icon type="profile" style={{ color: "rgba(0,0,0,.25)" }} />}
       placeholder="Category"
       component={InputField}
+      label="Category"
     />
     <Field
       name="description"
       prefix={<Icon type="file" style={{ color: "rgba(0,0,0,.25)" }} />}
       placeholder="Description"
       component={InputField}
+      label="About the listing"
     />
   </React.Fragment>
 );

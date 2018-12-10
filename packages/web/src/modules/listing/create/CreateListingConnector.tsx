@@ -56,9 +56,13 @@ export class CreateListingConnector extends React.PureComponent<
         }}
         onSubmit={this.submit}
       >
-        {() => (
+        {props => (
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <Form className="login-form" style={{ minWidth: 300 }}>
+            <Form
+              className="login-form"
+              style={{ minWidth: 300 }}
+              onSubmit={props.handleSubmit}
+            >
               {pages[this.state.page]}
               <FormItem>
                 {this.state.page === pages.length - 1 ? (

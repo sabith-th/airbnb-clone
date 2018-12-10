@@ -83,7 +83,11 @@ export const startServer = async () => {
       : await createTypeORMConnection();
 
   if (process.env.NODE_ENV !== "test") {
-    await connection.runMigrations();
+    try {
+      await connection.runMigrations();
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   passport.use(
