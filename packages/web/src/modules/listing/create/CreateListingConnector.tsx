@@ -1,5 +1,6 @@
+import { NewPropsCreateListing, withCreateListing } from "@abb/controller";
 import { Button, Form } from "antd";
-import { Formik } from "formik";
+import { Formik, FormikActions } from "formik";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { Page1 } from "./ui/Page1";
@@ -26,16 +27,20 @@ interface State {
   page: number;
 }
 
-export class CreateListingConnector extends React.PureComponent<
-  RouteComponentProps<{}>,
+class C extends React.PureComponent<
+  RouteComponentProps<{}> & NewPropsCreateListing,
   State
 > {
   state = {
     page: 0
   };
 
-  submit = (values: any) => {
-    console.log(values);
+  submit = async (
+    values: FormValues,
+    { setSubmitting }: FormikActions<FormValues>
+  ) => {
+    await this.props.createListing(values);
+    setSubmitting(false);
   };
 
   nextPage = () => this.setState(state => ({ page: state.page + 1 }));
@@ -56,24 +61,27 @@ export class CreateListingConnector extends React.PureComponent<
         }}
         onSubmit={this.submit}
       >
-        {props => (
+        {({ isSubmitting, handleSubmit, isValid }) => (
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Form
               className="login-form"
               style={{ minWidth: 300 }}
-              onSubmit={props.handleSubmit}
+              onSubmit={handleSubmit}
             >
               {pages[this.state.page]}
               <FormItem>
                 {this.state.page === pages.length - 1 ? (
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    className="login-form-button"
-                    style={{ width: "100%" }}
-                  >
-                    Create Listing
-                  </Button>
+                  <div>
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      className="login-form-button"
+                      style={{ width: "100%" }}
+                      disabled={!isValid || isSubmitting}
+                    >
+                      Create Listing
+                    </Button>
+                  </div>
                 ) : (
                   <Button
                     type="primary"
@@ -92,3 +100,5 @@ export class CreateListingConnector extends React.PureComponent<
     );
   }
 }
+
+export const CreateListingConnector = withCreateListing(C);
