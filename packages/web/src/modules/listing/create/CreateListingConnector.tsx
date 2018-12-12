@@ -1,4 +1,4 @@
-import { NewPropsCreateListing, withCreateListing } from "@abb/controller";
+import { withCreateListing, WithCreateListing } from "@abb/controller";
 import { Button, Form } from "antd";
 import { Formik, FormikActions } from "formik";
 import * as React from "react";
@@ -28,7 +28,7 @@ interface State {
 }
 
 class C extends React.PureComponent<
-  RouteComponentProps<{}> & NewPropsCreateListing,
+  RouteComponentProps<{}> & WithCreateListing,
   State
 > {
   state = {
