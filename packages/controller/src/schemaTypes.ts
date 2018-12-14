@@ -58,6 +58,26 @@ export interface CreateListingMutationVariables {
   beds: number;
   guests: number;
   amenities: string[];
+  picture?: any | null;
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: FindListingsQuery
+// ====================================================
+
+export interface FindListingsQuery_findListings {
+  __typename: "Listing";
+  id: string;
+  name: string;
+  pictureUrl: string;
+  description: string;
+}
+
+export interface FindListingsQuery {
+  findListings: FindListingsQuery_findListings[];
 }
 
 /* tslint:disable */
