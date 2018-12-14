@@ -1,9 +1,6 @@
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
-import {
-  CreateListingMutation,
-  CreateListingMutationVariables
-} from "../../schemaTypes";
+import { CreateListingMutation, CreateListingMutationVariables } from "../../schemaTypes";
 
 export const createListingMutation = gql`
   mutation CreateListingMutation(
@@ -16,6 +13,7 @@ export const createListingMutation = gql`
     $beds: Int!
     $guests: Int!
     $amenities: [String!]!
+    $picture: Upload
   ) {
     createListing(
       input: {
@@ -28,6 +26,7 @@ export const createListingMutation = gql`
         beds: $beds
         guests: $guests
         amenities: $amenities
+        picture: $picture
       }
     )
   }

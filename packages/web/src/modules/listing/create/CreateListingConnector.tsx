@@ -21,6 +21,7 @@ interface FormValues {
   beds: number;
   guests: number;
   amenities: string[];
+  picture: any;
 }
 
 interface State {
@@ -57,7 +58,8 @@ class C extends React.PureComponent<
           longitude: 0,
           beds: 0,
           guests: 0,
-          amenities: []
+          amenities: [],
+          picture: null
         }}
         onSubmit={this.submit}
       >

@@ -7,6 +7,7 @@ dist/
 tmp/
 temp/
 dist/
+images/
 .env
 dump.rdb
 .netlify/

@@ -1,6 +1,7 @@
 import { Icon } from "antd";
 import { Field } from "formik";
 import * as React from "react";
+import { DropzoneField } from "../../../shared/DropzoneField";
 import { InputField } from "../../../shared/InputField";
 
 export const Page1 = () => (
@@ -26,5 +27,6 @@ export const Page1 = () => (
       component={InputField}
       label="About the listing"
     />
+    <Field name="picture" component={DropzoneField} />
   </React.Fragment>
 );
