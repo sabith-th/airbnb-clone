@@ -7,6 +7,7 @@ import { CreateListingConnector } from "../modules/listing/create/CreateListingC
 import { DeleteListingConnector } from "../modules/listing/delete/DeleteListing";
 import { FindListingsConnector } from "../modules/listing/find/FindListingsConnector";
 import { LoginConnector } from "../modules/login/LoginConnector";
+import { Logout } from "../modules/logout";
 import { RegisterConnector } from "../modules/register/RegisterConnector";
 import { TextPage } from "../modules/TextPage";
 
@@ -15,6 +16,7 @@ export const Routes = () => (
     <Switch>
       <Route exact={true} path="/register" component={RegisterConnector} />
       <Route exact={true} path="/login" component={LoginConnector} />
+      <Route exact={true} path="/logout" component={Logout} />
       <Route
         exact={true}
         path="/forgot-password"
@@ -27,6 +29,7 @@ export const Routes = () => (
       />
       <Route path="/m/" component={TextPage} />
       <Route path="/listings" component={FindListingsConnector} />
+      <AuthRouter path="/create-listing" component={CreateListingConnector} />
       <AuthRouter path="/create-listing" component={CreateListingConnector} />
       <AuthRouter path="/delete-listing" component={DeleteListingConnector} />
     </Switch>

@@ -2,7 +2,7 @@ import { withCreateListing, WithCreateListing } from "@abb/controller";
 import { Button, Form } from "antd";
 import { Formik, FormikActions } from "formik";
 import * as React from "react";
-import { RouteComponentProps } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import { Page1 } from "./ui/Page1";
 import { Page2 } from "./ui/Page2";
 import { Page3 } from "./ui/Page3";
@@ -70,6 +70,7 @@ class C extends React.PureComponent<
               style={{ minWidth: 300 }}
               onSubmit={handleSubmit}
             >
+              <Link to="/logout">Logout</Link>
               {pages[this.state.page]}
               <FormItem>
                 {this.state.page === pages.length - 1 ? (
