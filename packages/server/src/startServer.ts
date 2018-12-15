@@ -1,6 +1,6 @@
 import * as connectRedis from "connect-redis";
 import "dotenv/config";
-import * as express from 'express';
+import * as express from "express";
 import * as RateLimit from "express-rate-limit";
 import * as session from "express-session";
 import { applyMiddleware } from "graphql-middleware";
@@ -11,6 +11,7 @@ import * as RateLimitRedisStore from "rate-limit-redis";
 import "reflect-metadata";
 import { REDIS_SESSION_PREFIX } from "./constants";
 import { User } from "./entity/User";
+import { userLoader } from "./loaders/UserLoader";
 import { middleware } from "./middleware";
 import { redis } from "./redis";
 import { confirmEmail } from "./routes/confirmEmail";
@@ -35,7 +36,8 @@ export const startServer = async () => {
       redis,
       url: request.protocol + "://" + request.get("host"),
       session: request.session,
-      req: request
+      req: request,
+      userLoader: userLoader()
     })
   });
 
@@ -68,7 +70,7 @@ export const startServer = async () => {
     })
   );
 
-  server.express.use('/images', express.static('images'));
+  server.express.use("/images", express.static("images"));
 
   const cors = {
     credentials: true,
