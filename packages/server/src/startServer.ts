@@ -1,5 +1,6 @@
 import * as connectRedis from "connect-redis";
 import "dotenv/config";
+import * as express from 'express';
 import * as RateLimit from "express-rate-limit";
 import * as session from "express-session";
 import { applyMiddleware } from "graphql-middleware";
@@ -66,6 +67,8 @@ export const startServer = async () => {
       }
     })
   );
+
+  server.express.use('/images', express.static('images'));
 
   const cors = {
     credentials: true,

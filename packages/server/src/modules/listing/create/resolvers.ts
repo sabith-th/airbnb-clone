@@ -6,8 +6,8 @@ import { ResolverMap } from "../../../types/graphql-utils";
 const uploadDir = "images";
 
 const storeUpload = async ({ stream, filename }: any): Promise<any> => {
-  const id = shortid.generate();
-  const path = `${uploadDir}/${id}-${filename}`;
+  const id = `${shortid.generate()}-${filename}`;
+  const path = `${uploadDir}/${id}`;
 
   return new Promise((resolve, reject) =>
     stream
@@ -19,8 +19,8 @@ const storeUpload = async ({ stream, filename }: any): Promise<any> => {
 
 const processUpload = async (upload: any) => {
   const { stream, filename } = await upload;
-  const { path } = await storeUpload({ stream, filename });
-  return path;
+  const { id } = await storeUpload({ stream, filename });
+  return id;
 };
 
 export const resolvers: ResolverMap = {

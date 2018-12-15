@@ -16,10 +16,9 @@ export class C extends React.PureComponent<WithFindListings> {
             hoverable={true}
             style={{ width: 240 }}
             cover={
-              <img
-                alt="example"
-                src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-              />
+              listing.pictureUrl && (
+                <img alt={listing.description} src={listing.pictureUrl} />
+              )
             }
           >
             <Meta title={listing.name} description={listing.description} />
