@@ -20,8 +20,12 @@ export class C extends React.PureComponent<WithFindListings> {
                 <img alt={listing.description} src={listing.pictureUrl} />
               )
             }
+            title={listing.name}
           >
-            <Meta title={listing.name} description={listing.description} />
+            <Meta
+              title={listing.description}
+              description={listing.owner.email}
+            />
           </Card>
         ))}
       </div>

@@ -12,6 +12,10 @@ export const findListingsQuery = gql`
       name
       pictureUrl
       description
+      owner {
+        id
+        email
+      }
     }
   }
 `;

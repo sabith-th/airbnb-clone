@@ -10,6 +10,7 @@ type Listing {
   guests: Int!
   amenities: [String!]!
   pictureUrl: String!
+  owner: User!
 }
 
 type Query {
