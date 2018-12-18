@@ -4,17 +4,18 @@ import * as React from "react";
 import { ScrollView, Text, View } from "react-native";
 import { Button } from "react-native-elements";
 import { RouteComponentProps } from "react-router-native";
+import { CheckboxGroupField } from "../../shared/CheckboxGroupField";
 import { InputField } from "../../shared/InputField";
 
 interface FormValues {
   name: string;
   category: string;
   description: string;
-  price: number;
-  latitude: number;
-  longitude: number;
-  beds: number;
-  guests: number;
+  price: string;
+  latitude: string;
+  longitude: string;
+  beds: string;
+  guests: string;
   amenities: string[];
   picture: any;
 }
@@ -38,11 +39,11 @@ class C extends React.PureComponent<
           name: "",
           category: "",
           description: "",
-          price: 0,
-          latitude: 0,
-          longitude: 0,
-          beds: 0,
-          guests: 0,
+          price: "0",
+          latitude: "0",
+          longitude: "0",
+          beds: "0",
+          guests: "0",
           amenities: [],
           picture: null
         }}
@@ -81,6 +82,7 @@ class C extends React.PureComponent<
                 component={InputField}
                 containerStyle={{ width: "100%" }}
                 autoCapitalize="none"
+                keyboardType="numeric"
               />
               <Field
                 name="latitude"
@@ -88,6 +90,7 @@ class C extends React.PureComponent<
                 component={InputField}
                 containerStyle={{ width: "100%" }}
                 autoCapitalize="none"
+                keyboardType="numeric"
               />
               <Field
                 name="longitude"
@@ -95,6 +98,7 @@ class C extends React.PureComponent<
                 component={InputField}
                 containerStyle={{ width: "100%" }}
                 autoCapitalize="none"
+                keyboardType="numeric"
               />
               <Field
                 name="beds"
@@ -102,6 +106,7 @@ class C extends React.PureComponent<
                 component={InputField}
                 containerStyle={{ width: "100%" }}
                 autoCapitalize="none"
+                keyboardType="numeric"
               />
               <Field
                 name="guests"
@@ -109,6 +114,12 @@ class C extends React.PureComponent<
                 component={InputField}
                 containerStyle={{ width: "100%" }}
                 autoCapitalize="none"
+                keyboardType="numeric"
+              />
+              <Field
+                name="amenities"
+                options={["WiFi", "Pool", "Satellite TV"]}
+                component={CheckboxGroupField}
               />
               <Button
                 style={{ marginTop: 30 }}
